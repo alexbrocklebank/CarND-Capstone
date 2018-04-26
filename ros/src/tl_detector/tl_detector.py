@@ -51,6 +51,7 @@ class TLDetector(object):
         self.state_count = 0
 
         self.waypoints_2d = None
+        self.waypoint_tree = None
 
         rospy.spin()
 
@@ -120,6 +121,9 @@ class TLDetector(object):
             int: ID of traffic light color (specified in styx_msgs/TrafficLight)
 
         """
+        # For testing, just return the light state
+        return light.state
+
         # if(not self.has_image):
         #    self.prev_light_loc = None
         #    return False
@@ -129,8 +133,6 @@ class TLDetector(object):
         #Get classification
         # return self.light_classifier.get_classification(cv_image)
 
-        # For testing, just return the light state
-        return light.state
 
     def process_traffic_lights(self):
         """Finds closest visible traffic light, if one exists, and determines its
@@ -156,7 +158,7 @@ class TLDetector(object):
             diff = len(self.waypoints.waypoints)
             for i, light in enumerate(self.lights):
                 # Get stop line waypoint index
-                line = stop_line_positions[i]
+                # For testing, just return the light stateline = stop_line_positions[i]
                 temp_wp_idx = self.get_closest_waypoint(line[0], line[1])
                 # Find closest stop line waypoint index
                 d = temp_wp_idx - car_wp_idx
@@ -168,7 +170,7 @@ class TLDetector(object):
         if closest_light:
             state = self.get_light_state(closest_light)
             return line_wp_idx, state
-        # self.waypoints = None
+
         return -1, TrafficLight.UNKNOWN
 
 if __name__ == '__main__':
