@@ -2,6 +2,7 @@
 import numpy as np
 import rospy
 from geometry_msgs.msg import PoseStamped
+from std_msgs.msg import Int32
 from styx_msgs.msg import Lane, Waypoint
 from scipy.spatial import KDTree
 
@@ -46,7 +47,7 @@ class WaypointUpdater(object):
         self.base_lane = None
         self.waypoints_2d = None
         self.waypoint_tree = None
-        self.stopline_wp_idx = None
+        self.stopline_wp_idx = -1
 
         #rospy.spin()
         self.loop()
@@ -54,7 +55,7 @@ class WaypointUpdater(object):
     def loop(self):
         rate = rospy.Rate(50)
         while not rospy.is_shutdown():
-            if self.pose and self.waypoint_tree:
+            if self.pose and self.base_lane:
                 # Get closest waypoint
                 # closest_waypoint_idx = self.get_closest_waypoint_idx()
                 # self.publish_waypoints(closest_waypoint_idx)
