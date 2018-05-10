@@ -1,6 +1,7 @@
 
 class LowPassFilter(object):
     def __init__(self, tau, ts):
+        # Class member variables
         self.a = 1. / (tau / ts + 1.)
         self.b = tau / ts / (tau / ts + 1.);
 
@@ -11,6 +12,9 @@ class LowPassFilter(object):
         return self.last_val
 
     def filt(self, val):
+        """Filter value passed in
+
+        """
         if self.ready:
             val = self.a * val + self.b * self.last_val
         else:
