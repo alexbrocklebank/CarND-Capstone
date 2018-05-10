@@ -7,7 +7,7 @@ This repo is my submission for the final project of the Udacity Self-Driving Car
 ![Project Architecture][rosmap]
 
 [rosmap]: https://github.com/alexbrocklebank/CarND-Capstone/blob/master/imgs/final-project-ros-graph-v2.png "Project ROS Architecture"
-&copy; Udacity
+Image &copy; Udacity
 
 ### Native Environment Setup
 
