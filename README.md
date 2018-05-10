@@ -4,7 +4,9 @@ Alex Brocklebank - [population96@gmail.com](population96@gmail.com)
 ### Introduction
 This repo is my submission for the final project of the Udacity Self-Driving Car Nanodegree: Programming a Real Self-Driving Car. For more information about the project, see the project introduction [here](https://classroom.udacity.com/nanodegrees/nd013/parts/6047fe34-d93c-4f50-8336-b70ef10cb4b2/modules/e1a23b06-329a-4684-a717-ad476f0d8dff/lessons/462c933d-9f24-42d3-8bdc-a08a5fc866e4/concepts/5ab4b122-83e6-436d-850f-9f4d26627fd9).  The project entailed working on 3 separate modules: Perception, Planning, and Control.  
 
-![Project Architecture](https://github.com/alexbrocklebank/CarND-Capstone/tree/master/imgs/final-project-ros-graph-v2.png "Project Architecture")
+![Project Architecture][map]
+
+[map]: https://github.com/alexbrocklebank/CarND-Capstone/tree/master/imgs/final-project-ros-graph-v2.png "Project ROS Architecture"
 &copy; Udacity
 
 ### Native Environment Setup
@@ -43,14 +45,15 @@ source devel/setup.sh
 ```bash
 roslaunch launch/styx.launch
 ```
-OR styx2.launch for Test Lot simulator
+
+5. Or run styx2.launch for Test Lot simulator
 ```bash
 roslaunch launch/styx2.launch
 ```
 
-5. Run the simulator and select Highway or Test Lot
+6. Run the simulator and select Highway or Test Lot
 
-## Control Module
+### Control Module
 
 The Control module contains the Drive-By-Wire(DBW) Node, which updates the simulator or the car to control the steering, throttle, and brakes.  This node needs to not only to be able to control the car well, but also allow for control to be relinquished to the driver and then resume without issue.  This is tested by checking and unchecking the box labeled 'Manual' in the simulator.
 
