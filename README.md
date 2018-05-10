@@ -4,7 +4,7 @@ Alex Brocklebank - [population96@gmail.com](population96@gmail.com)
 ### Introduction
 This repo is my submission for the final project of the Udacity Self-Driving Car Nanodegree: Programming a Real Self-Driving Car. For more information about the project, see the project introduction [here](https://classroom.udacity.com/nanodegrees/nd013/parts/6047fe34-d93c-4f50-8336-b70ef10cb4b2/modules/e1a23b06-329a-4684-a717-ad476f0d8dff/lessons/462c933d-9f24-42d3-8bdc-a08a5fc866e4/concepts/5ab4b122-83e6-436d-850f-9f4d26627fd9).  The project entailed working on 3 separate modules: Perception, Planning, and Control.  
 
-[Project Architecture](https://github.com/alexbrocklebank/CarND-Capstone/tree/master/imgs/final-project-ros-graph-v2.png "Project Architecture")
+![Project Architecture](https://github.com/alexbrocklebank/CarND-Capstone/tree/master/imgs/final-project-ros-graph-v2.png "Project Architecture")
 &copy; Udacity
 
 ### Native Environment Setup
@@ -40,10 +40,12 @@ source devel/setup.sh
 
 ```
 4. Run styx.launch for Highway simulator
-```roslaunch launch/styx.launch
+```bash
+roslaunch launch/styx.launch
 ```
 OR styx2.launch for Test Lot simulator
-```roslaunch launch/styx2.launch
+```bash
+roslaunch launch/styx2.launch
 ```
 
 5. Run the simulator and select Highway or Test Lot
@@ -54,13 +56,13 @@ The Control module contains the Drive-By-Wire(DBW) Node, which updates the simul
 
 To control the 3 major outputs, I used a variety of controllers that Udacity provided with the skeleton framework for this project rather than reinvent the wheel.  
 
-The velocity was filtered with the included `LowPassFilter.py` python class, to smooth out the velocity value when being read at approximately 50 times per second.  This was especially important given how many equations rely on the velocity, and any fluctuations of the velocity would cascade through them.
+* The velocity was filtered with the included `LowPassFilter.py` python class, to smooth out the velocity value when being read at approximately 50 times per second.  This was especially important given how many equations rely on the velocity, and any fluctuations of the velocity would cascade through them.
 
-I used a PID controller, which was included in the `PID.py` python class, for the throttle.  It took a large amount of fine-tuning the PID parameters before I started to actually see the vehicle slow down and stop in the simulator.
+* For the throttle I used a PID controller, which was included in the `PID.py` python class.  It took a large amount of fine-tuning the PID parameters before I started to actually see the vehicle slow down and stop in the simulator.
 
-Steering was controlled with the included `YawController.py` python class.  I had utilized a simple equation of `desired_angular_velocity * steering_ratio` for a while to achieve a rough but fairly "on rails" effect for the steering, but this was partly due to a fault in my waypoint code at that time.  The yaw controller offered smoother steering, at the cost of a little meandering.
+* Steering was controlled with the included `YawController.py` python class.  I had utilized a simple equation of `desired_angular_velocity * steering_ratio` for a while to achieve a rough but fairly "on rails" effect for the steering, but this was partly due to a fault in my waypoint code at that time.  The yaw controller offered smoother steering, at the cost of a little meandering.
 
-Braking was the simplest to control.  Braking is applied whenever the throttle reaches a minimum and is switched to 0.  This is to avoid braking while hitting the gas, which for obvious reasons is a behavior no-one wants in a car as it leads to excessive brake wear and possibly damage or fire.  The braking is applied to keep the car in place, and is not utilized excessively in slowing down the car to avoid uncomfortable rapid deceleration and "slamming" on the brakes.
+* Braking was the simplest to control.  Braking is applied whenever the throttle reaches a minimum and is switched to 0.  This is to avoid braking while hitting the gas, which for obvious reasons is a behavior no-one wants in a car as it leads to excessive brake wear and possibly damage or fire.  The braking is applied to keep the car in place, and is not utilized excessively in slowing down the car to avoid uncomfortable rapid deceleration and "slamming" on the brakes.
 
 ### Planning Module
 
